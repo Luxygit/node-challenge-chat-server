@@ -17,17 +17,22 @@ let welcomeMessage = {
 let messages = [welcomeMessage];
 
 //functions
-//const newMessageFromDom 
-//NOT WORKING 
+
 const saveMessage = (req, res) => {
     
-    const newMessage = document.getElementById('messageId')
+    const newMessage = req.body
     console.log(newMessage.value);
+
+    const sameMessage = messages.find((q) => q.text === newMessage.text);
+     if (sameMessage) {
+      res
+        .status(400)
+        .send("A message with the same content already exists.");
+    }
+
     const maxId = Math.max(...messages.map((q) => q.id));
     newMessage.id = maxId + 1;
-
     messages.push(newMessage);
-
     res.status(201).send(newMessage);
   };
 const getMessageByIdFunction = (req, res) => {
@@ -54,6 +59,19 @@ const deleteMessageByIdFunction = (req, res) => {
        res.status(404).send(`Didn't find message with id ${messageId}`)
     }
 }
+
+const textQueryFunction = (req, res) => {
+    const term = req.query.text
+ 
+    const filteredMessages = messages.filter((q)=> q.text.includes(term) )
+   
+    res.status(200).send(filteredMessages)
+  }
+
+const getLatestFunction = (req,res) => {
+  let lastTen = messages.slice(-10)
+  res.send(lastTen)
+}
 app.use(express.json())
 
 app.get("/", function (req, res) {
@@ -63,12 +81,13 @@ app.get("/", function (req, res) {
 app .get("/messages", function (req, res) {
   res.send(messages);
 });
+app .get("/messages/latest", getLatestFunction);
 app .get("/messages/:messageId", getMessageByIdFunction);
 app .post("/messages", saveMessage);
 app .delete("/messages/:messageId", deleteMessageByIdFunction);
+app .get("/quotes/search", textQueryFunction)
 
-
-app.listen(3000, () => {
-   console.log("Listening on port 3000")
+app.listen(5000, () => {
+   console.log("Listening on port 5000")
   });
 
