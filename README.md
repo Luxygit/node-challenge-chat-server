@@ -1,3 +1,13 @@
+## EXTRA
+
+Design database (all the tables)
+Find the "easiest" use case.
+create table(s) that meet that use case.
+add dummy data
+tests that what you have makes sense
+Adapt your design (if needed)
+REPEAT :smile:
+
 # Challenge: A Chat Server
 
 ### How long will this take?
@@ -17,7 +27,7 @@ In the optional 'React' part of this challenge, you also make a React app which 
 - [ ] You should have completed at least Level 1 of the Quote Server challenge before attempting this challenge.
 
 - [ ] Have nodemon globally installed [npm install -g nodemon] -
-You can find the details how to install nodemon globally here: https://syllabus.migracode.org/course-content/nodejs/week-1#step-7-setting-up-a-server-to-listen-to-changes-automatically
+      You can find the details how to install nodemon globally here: https://syllabus.migracode.org/course-content/nodejs/week-1#step-7-setting-up-a-server-to-listen-to-changes-automatically
 
 ## Installation
 
